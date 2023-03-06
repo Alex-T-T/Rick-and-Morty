@@ -2,7 +2,11 @@ import logo from '../../assets/images/PngItem_438051 2.png'
 import { CharacterGalleryItem } from '../CharacterGalleryItem/CharacterGalleryItem'
 import { Character } from '../Character/Character'
 
+
 export const CharactersGallery = ({list}) => {
+
+    console.log(list);
+
 
     return (
         <>
@@ -19,7 +23,7 @@ export const CharactersGallery = ({list}) => {
                         placeholder='Filter by name...'
                 />
                 {
-                    list && list.map(({id, ...labels}) => {
+                    list && list?.map(({id, ...labels}) => {
                         return (
                             <CharacterGalleryItem key={id} props={labels} />
                         )
