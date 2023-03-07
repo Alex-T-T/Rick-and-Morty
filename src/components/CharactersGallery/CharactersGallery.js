@@ -2,23 +2,44 @@ import logo from '../../assets/images/PngItem_438051 2.png'
 import { CharacterGalleryItem } from '../CharacterGalleryItem/CharacterGalleryItem'
 import { useEffect, useState } from 'react'
 import { getCharacters } from 'rickmortyapi'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import debounce from 'lodash.debounce';
 
 export const CharactersGallery = () => {
     const [characters, setCharacters] = useState([]);
+    const [name, setName] = useState('')
+    console.log('name: ', name);
 
     useEffect(() => {
         const getAllCharacters = async () => {
-        try {
-            const data = await getCharacters();
-            setCharacters(data.data.results);
-        } catch (error) {
-            throw new Error(error.message);
+            try {
+                if (name !== '') {
+                    const data = await getCharacters({ name });
+                    
+                    if (data.status === 404) {
+                        toast.error('Sorry! There are no Characters as you searching! Try once more!')
+                        return
+                    }
+                    setCharacters (data.data.results);
+                    return
+                }
+
+                const data = await getCharacters();
+                setCharacters(data.data.results);
+            } catch (error) {
+                console.log('error: ', error);
+                
+            toast.error('Sorry! There are no Characters as you searching! Try once more!')
+            throw new Error(error);
         }
         };
         getAllCharacters();
-    }, []);
+    }, [name]);
 
-    const charactersList = characters.sort((a, b) => a.name.localeCompare(b.name));
+
+
+    const charactersList = characters?.sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <>
@@ -33,6 +54,7 @@ export const CharactersGallery = () => {
                         autoComplete="off"
                         autoFocus
                         placeholder='Filter by name...'
+                        onChange={ debounce( (e) => setName(e.target.value), 300)}
                 />
                 <ul>
                     {
@@ -44,6 +66,7 @@ export const CharactersGallery = () => {
                     }
                 </ul>
             </main>
+            <ToastContainer theme="dark" position="bottom-center" autoClose={3000} />
         </>
     )
 }
