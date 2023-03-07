@@ -1,34 +1,23 @@
-import { CharactersGallery } from "./CharactersGallery/CharactersGallery";
-import { useEffect, useState } from 'react'
-import { getCharacters } from 'rickmortyapi'
+// import { lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Character } from "./";
+import { CharactersGallery } from "./";
 
+
+// const CharactersGallery = lazy(() => import('./CharactersGallery/CharactersGallery'))
 
 function App() {
-  const [characters, setCharacters] = useState([]);
 
-  useEffect(() => {
-    const getAllCharacters = async () => {
-      try {
-        const data = await getCharacters();
-        setCharacters(data.data.results);
-      } catch (error) {
-        throw new Error(error.message);
-      }
-    };
-    getAllCharacters();
-  }, []);
+return (
+  <>
+    <Routes>
+      <Route path="/characters" element={<CharactersGallery />} />
+      <Route path="/character/:id" element={<Character />} />
+      {/* <Route path="*" element={<NotFound />} /> */}
+    </Routes>
+  </>
+)
 
-  const sortedCharacters = characters.sort((a, b) => a.name.localeCompare(b.name));
-
-
-
-
-  return (
-    <>
-        <CharactersGallery list={sortedCharacters}/>
-
-    </>
-  );
 }
 
 export default App;

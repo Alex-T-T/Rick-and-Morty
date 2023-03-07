@@ -1,38 +1,59 @@
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getCharacter } from 'rickmortyapi'
+
 
 export const Character = () => {
+const { id } = useParams();
+const [character, setCharacter] = useState({});
+
+    useEffect(() => {
+        const getCharacterById = async (id) => {
+            try {
+            const data = await getCharacter(id);
+            setCharacter(data.data);
+        } catch (error) {
+            throw new Error(error.message);
+        }
+        };
+        getCharacterById(Number(id));
+
+    }, [id]);
+
+    const {name, gender, status, species, origin, type, image} = character
 
     return (
         <>
             <header>
-                <button type="button"> Go Back</button>
+                <Link to='/characters'> Go Back</Link>
             </header>  
-            <main>
-                <img alt='character avatar'/>
-                <h2> name </h2>
+            { character && <main>
+                <img src={image} alt='character avatar'/>
+                <h2> {name} </h2>
                 <h3> Informations </h3>
                 <ul>
                     <li>
                         <h4>Gender</h4>
-                        <p>Gender</p>
+                        <p>{gender}</p>
                     </li>
                     <li>
                         <h4>Status</h4>
-                        <p>Status</p>
+                        <p>{status}</p>
                     </li>
                     <li>
                         <h4>Specie</h4>
-                        <p>Specie</p>
+                        <p>{species}</p>
                     </li>
                     <li>
                         <h4>Origin</h4>
-                        <p>Origin</p>
+                        <p>{ origin?.name }</p>
                     </li>
                     <li>
                         <h4>Type</h4>
-                        <p>Type</p>
+                        <p>{type === '' ? 'UNKNOWN' : type  }</p>
                     </li>
                 </ul>
-            </main>
+            </main>}
         </>
     )
 }

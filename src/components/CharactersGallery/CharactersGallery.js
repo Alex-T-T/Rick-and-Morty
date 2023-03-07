@@ -1,12 +1,24 @@
 import logo from '../../assets/images/PngItem_438051 2.png'
 import { CharacterGalleryItem } from '../CharacterGalleryItem/CharacterGalleryItem'
-import { Character } from '../Character/Character'
+import { useEffect, useState } from 'react'
+import { getCharacters } from 'rickmortyapi'
 
+export const CharactersGallery = () => {
+    const [characters, setCharacters] = useState([]);
 
-export const CharactersGallery = ({list}) => {
+    useEffect(() => {
+        const getAllCharacters = async () => {
+        try {
+            const data = await getCharacters();
+            setCharacters(data.data.results);
+        } catch (error) {
+            throw new Error(error.message);
+        }
+        };
+        getAllCharacters();
+    }, []);
 
-    console.log(list);
-
+    const charactersList = characters.sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <>
@@ -22,14 +34,15 @@ export const CharactersGallery = ({list}) => {
                         autoFocus
                         placeholder='Filter by name...'
                 />
-                {
-                    list && list?.map(({id, ...labels}) => {
-                        return (
-                            <CharacterGalleryItem key={id} props={labels} />
-                        )
-                    })
-                }
-                <Character/>
+                <ul>
+                    {
+                        charactersList && charactersList?.map(({id, ...labels}) => {
+                            return (
+                                <CharacterGalleryItem key={id} id={id} props={labels} />
+                            )
+                        })
+                    }
+                </ul>
             </main>
         </>
     )
