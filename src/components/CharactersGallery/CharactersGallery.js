@@ -9,7 +9,6 @@ import debounce from 'lodash.debounce';
 export const CharactersGallery = () => {
     const [characters, setCharacters] = useState([]);
     const [name, setName] = useState('')
-    console.log('name: ', name);
 
     useEffect(() => {
         const getAllCharacters = async () => {
@@ -18,7 +17,7 @@ export const CharactersGallery = () => {
                     const data = await getCharacters({ name });
                     
                     if (data.status === 404) {
-                        toast.error('Sorry! There are no Characters as you searching! Try once more!')
+                        toast.error('Sorry! There are no searching Characters! Try once more!')
                         return
                     }
                     setCharacters (data.data.results);
@@ -27,17 +26,13 @@ export const CharactersGallery = () => {
 
                 const data = await getCharacters();
                 setCharacters(data.data.results);
-            } catch (error) {
-                console.log('error: ', error);
-                
-            toast.error('Sorry! There are no Characters as you searching! Try once more!')
-            throw new Error(error);
-        }
+            } catch (error) {                
+                toast.error('Sorry! There are no Characters as you searching! Try once more!')
+                throw new Error(error);
+            }
         };
         getAllCharacters();
     }, [name]);
-
-
 
     const charactersList = characters?.sort((a, b) => a.name.localeCompare(b.name));
 
