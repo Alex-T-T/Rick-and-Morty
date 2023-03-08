@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getCharacter } from 'rickmortyapi'
-
 
 export const Character = () => {
 const { id } = useParams();
 const [character, setCharacter] = useState({});
-
+const navigate = useNavigate();
+    
     useEffect(() => {
         const getCharacterById = async (id) => {
             try {
@@ -22,10 +22,14 @@ const [character, setCharacter] = useState({});
 
     const {name, gender, status, species, origin, type, image} = character
 
+    const handleClick = () => {
+       navigate(-1);
+    }
+
     return (
         <>
             <header>
-                <Link to='/characters'> Go Back</Link>
+                <button onClick={handleClick}> Go Back</button>
             </header>  
             { character && <main>
                 <img src={image} alt='character avatar'/>

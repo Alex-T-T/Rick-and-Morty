@@ -5,35 +5,46 @@ import { getCharacters } from 'rickmortyapi'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import debounce from 'lodash.debounce';
+import { useSearchParams } from 'react-router-dom';
+
 
 export const CharactersGallery = () => {
-    const [characters, setCharacters] = useState([]);
-    const [name, setName] = useState('')
+    const [characters, setCharacters] = useState(JSON.parse(window.localStorage.getItem('characters')) || []);
+    let [searchParams, setSearchParams] = useSearchParams();
+
+    const name = searchParams.get('name') || '';
 
     useEffect(() => {
-        const getAllCharacters = async () => {
+        if (name !== '') {
+            const getAllCharacters = async (name) => {
             try {
-                if (name !== '') {
-                    const data = await getCharacters({ name });
-                    
-                    if (data.status === 404) {
+                const data = await getCharacters({ name })
+                if (data.status === 404) {
                         toast.error('Sorry! There are no searching Characters! Try once more!')
                         return
                     }
-                    setCharacters (data.data.results);
-                    return
-                }
-
-                const data = await getCharacters();
-                setCharacters(data.data.results);
-            } catch (error) {                
-                toast.error('Sorry! There are no Characters as you searching! Try once more!')
+                setCharacters(data.data.results)
+                window.localStorage.setItem('characters', JSON.stringify(data.data.results))
+            } catch (error) {
                 throw new Error(error);
-            }
-        };
-        getAllCharacters();
-    }, [name]);
+                }
+            };
+                getAllCharacters(name)
+            return
+        }
+        const getAllCharacters = async () => {
+            try {
+                const data = await getCharacters()
+                setCharacters(data.data.results)
+            } catch (error) {
+                throw new Error(error);
+                }
+            };
+                getAllCharacters()
+    }, [name])
 
+
+    
     const charactersList = characters?.sort((a, b) => a.name.localeCompare(b.name));
 
     return (
@@ -49,7 +60,7 @@ export const CharactersGallery = () => {
                         autoComplete="off"
                         autoFocus
                         placeholder='Filter by name...'
-                        onChange={ debounce( (e) => setName(e.target.value), 300)}
+                        onChange={debounce((e) => setSearchParams({ "name": e.target.value}), 300)}
                 />
                 <ul>
                     {
