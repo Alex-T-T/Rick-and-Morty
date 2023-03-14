@@ -1,38 +1,32 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getCharacter } from 'rickmortyapi'
 
 export const Character = () => {
-const { id } = useParams();
-const [character, setCharacter] = useState({});
-const navigate = useNavigate();
-    
+    const { id } = useParams();
+    const [character, setCharacter] = useState({});
+
     useEffect(() => {
         const getCharacterById = async (id) => {
             try {
-            const data = await getCharacter(id);
-            setCharacter(data.data);
-        } catch (error) {
-            throw new Error(error.message);
-        }
+                const data = await getCharacter(id);
+                setCharacter(data.data);
+            } catch (error) {
+                throw new Error(error.message);
+            }
         };
         getCharacterById(Number(id));
 
     }, [id]);
 
-    const {name, gender, status, species, origin, type, image} = character
-
-    const handleClick = () => {
-       navigate(-1);
-    }
+    const { name, gender, status, species, origin, type, image } = character
 
     return (
         <>
-            <header>
-                <button onClick={handleClick}> Go Back</button>
-            </header>  
-            { character && <main>
-                <img src={image} alt='character avatar'/>
+            <Link to={'..'} relative="path">Go Back</Link>
+
+            {character && <main>
+                <img src={image} alt='character avatar' />
                 <h2> {name} </h2>
                 <h3> Informations </h3>
                 <ul>
@@ -50,11 +44,11 @@ const navigate = useNavigate();
                     </li>
                     <li>
                         <h4>Origin</h4>
-                        <p>{ origin?.name }</p>
+                        <p>{origin?.name}</p>
                     </li>
                     <li>
                         <h4>Type</h4>
-                        <p>{type === '' ? 'UNKNOWN' : type  }</p>
+                        <p>{type === '' ? 'UNKNOWN' : type}</p>
                     </li>
                 </ul>
             </main>}
