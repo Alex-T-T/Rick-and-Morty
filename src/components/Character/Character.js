@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getCharacter } from 'rickmortyapi'
+import { FiArrowLeft } from 'react-icons/fi'
+import css from '../Character/Character.module.css'
 
 export const Character = () => {
     const { id } = useParams();
     const [character, setCharacter] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getCharacterById = async (id) => {
@@ -21,37 +24,45 @@ export const Character = () => {
 
     const { name, gender, status, species, origin, type, image } = character
 
-    return (
-        <>
-            <Link to={'..'} relative="path">Go Back</Link>
+    const handleClick = () => {
+        navigate(-1);
+    }
 
+    return (
+        <div className={css.container}>
+            <header className={css.header}>
+                <FiArrowLeft style={{
+                    verticalAlign: 'top',
+                }} size={24} />
+                <button className={css.goBackBtn} onClick={handleClick}> Go Back</button>
+            </header>
             {character && <main>
-                <img src={image} alt='character avatar' />
-                <h2> {name} </h2>
-                <h3> Informations </h3>
+                <img src={image} className={css.avatar} alt='character avatar' />
+                <h2 className={css.title}> {name}   </h2>
+                <h3 className={css.subtitle}> Informations </h3>
                 <ul>
-                    <li>
-                        <h4>Gender</h4>
-                        <p>{gender}</p>
+                    <li className={css.propertyBox}>
+                        <h4 className={css.propertyTitle}>Gender</h4>
+                        <p className={css.propertyText}>{gender}</p>
                     </li>
-                    <li>
-                        <h4>Status</h4>
-                        <p>{status}</p>
+                    <li className={css.propertyBox}>
+                        <h4 className={css.propertyTitle}>Status</h4>
+                        <p className={css.propertyText}>{status}</p>
                     </li>
-                    <li>
-                        <h4>Specie</h4>
-                        <p>{species}</p>
+                    <li className={css.propertyBox}>
+                        <h4 className={css.propertyTitle}>Specie</h4>
+                        <p className={css.propertyText}>{species}</p>
                     </li>
-                    <li>
-                        <h4>Origin</h4>
-                        <p>{origin?.name}</p>
+                    <li className={css.propertyBox}>
+                        <h4 className={css.propertyTitle}>Origin</h4>
+                        <p className={css.propertyText}>{origin?.name}</p>
                     </li>
-                    <li>
-                        <h4>Type</h4>
-                        <p>{type === '' ? 'UNKNOWN' : type}</p>
+                    <li className={css.propertyBox}>
+                        <h4 className={css.propertyTitle}>Type</h4>
+                        <p className={css.propertyText}>{type === '' ? 'Unknown' : type}</p>
                     </li>
                 </ul>
             </main>}
-        </>
+        </div>
     )
 }
