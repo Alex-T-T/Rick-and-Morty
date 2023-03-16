@@ -1,16 +1,63 @@
-
 .container {
-    padding: 23px 24px 85px 24px;
-    max-width: 368px;
+    padding: 92px 24px;
+    max-width: 360px;
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;
 }
 
 .header {
-    margin-bottom: 77px;
+    margin-bottom: 32px;
 }
 
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchBox {
+    position: relative;
+}
+
+.search {
+    box-sizing:border-box;
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    margin-bottom: 32px;
+}
+
+.search::placeholder {
+    font-family: 'Roboto';
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.searchIcon {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.galleryItem {
+        margin-bottom: 32px;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+        border-radius: 4px;
+}
+
+.galleryItem:last-child {
+    margin-bottom: 0;
+}
+
+/* .search::before {
+    content: '';
+    display: block;
+
+} */
+
+/*
 .goBackBtn {
     border: none;
     background-color: transparent;
@@ -86,7 +133,7 @@
 
 @media screen and (min-width: 768px) {
     .container {
-        padding: 21px 34px 50px 34px;
+        padding: 21px 50px 50px 50px;
         max-width: 768px;
     }
 
@@ -114,29 +161,29 @@
     }
 }
 
-    @media screen and (min-width: 1440px) {
-        .container {
-            padding: 21px 50px 142px 50px;
-            max-width: 1440px;
-        }
-
-        .header {
-            margin-bottom: 31px;
-        }
-
-        .avatar {
-            width: 300px;
-            margin-bottom: 16px;
-        }
-
-        .title {
-            font-size: 48px;
-            line-height: 56px;
-            margin-bottom: 48px;
-        }
-
-        .subtitle {
-            margin-bottom: 48px;
-        }
-
+@media screen and (min-width: 1440px) {
+    .container {
+        padding: 21px 50px 142px 50px;
+        max-width: 1440px;
     }
+
+    .header {
+        margin-bottom: 31px;
+    }
+
+    .avatar {
+        width: 300px;
+        margin-bottom: 16px;
+    }
+
+    .title {
+        font-size: 48px;
+        line-height: 56px;
+        margin-bottom: 48px;
+    }
+
+    .subtitle {
+        margin-bottom: 48px;
+    }
+
+} */

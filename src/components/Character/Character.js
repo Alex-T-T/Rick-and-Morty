@@ -31,10 +31,9 @@ export const Character = () => {
     return (
         <div className={css.container}>
             <header className={css.header}>
-                <FiArrowLeft style={{
-                    verticalAlign: 'top',
-                }} size={24} />
-                <button className={css.goBackBtn} onClick={handleClick}> Go Back</button>
+                <button className={css.goBackBtn} onClick={handleClick}> <FiArrowLeft style={{
+                    verticalAlign: 'middle',
+                }} size={24} />Go Back</button>
             </header>
             {character && <main>
                 <img src={image} className={css.avatar} alt='character avatar' />

@@ -1,14 +1,15 @@
+import css from '../CharacterGalleryItem/CharacterGalleryItem.module.css'
 
 export const CharacterGalleryItem = (props) => {
-    const { image, name, species} = props
+    const { image, name, species } = props
 
     return (
-            <>
-                <img src={image} alt='character avatar'/>
-                <div>
-                    <h2>{name}</h2>
-                    <p>{species}</p>
-                </div>
-            </>
+        <div className={css.characterCard}>
+            <img src={image} className={css.characterAvatar} alt='character avatar' />
+            <div className={css.characterInfo}>
+                <h2 className={css.characterInfoTitle}>{name}</h2>
+                <p className={css.characterInfoText}>{species}</p>
+            </div>
+        </div>
     )
 }
