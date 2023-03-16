@@ -5,7 +5,6 @@
 
 .characterAvatar {
     width: 100%;
-    /* object-position: 50% 50%; */
 }
 
 .characterInfo {
@@ -31,4 +30,11 @@
     line-height: 21px;
     letter-spacing: 0.25px;
     color: rgba(0, 0, 0, 0.6);
+}
+
+
+@media screen and (min-width: 1440px) {
+    .characterAvatar {
+        width: 240px;
+    }
 }

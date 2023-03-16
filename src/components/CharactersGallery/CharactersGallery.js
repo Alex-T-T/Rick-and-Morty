@@ -49,8 +49,6 @@ export const CharactersGallery = () => {
     getAllCharacters()
   }, [name])
 
-
-
   const charactersList = characters?.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
@@ -75,7 +73,7 @@ export const CharactersGallery = () => {
 
         {
           !isLoading
-            ? <ul> {charactersList?.map((character) => {
+            ? <ul className={css.charactersList}> {charactersList?.map((character) => {
               return <li key={character.id} className={css.galleryItem}><Link to={character.id.toString()} ><CharacterGalleryItem  {...character} /></Link></li>
             })}
             </ul>
