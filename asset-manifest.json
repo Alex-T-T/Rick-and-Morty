@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Alex-T-T/Rick-and-Morty/static/css/main.5a17801d.css",
+    "main.js": "/Alex-T-T/Rick-and-Morty/static/js/main.3236452c.js",
+    "static/media/PngItem_438051 2.png": "/Alex-T-T/Rick-and-Morty/static/media/PngItem_438051 2.5375322a8761d24d7b70.png",
+    "index.html": "/Alex-T-T/Rick-and-Morty/index.html",
+    "main.5a17801d.css.map": "/Alex-T-T/Rick-and-Morty/static/css/main.5a17801d.css.map",
+    "main.3236452c.js.map": "/Alex-T-T/Rick-and-Morty/static/js/main.3236452c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5a17801d.css",
+    "static/js/main.3236452c.js"
+  ]
+}
