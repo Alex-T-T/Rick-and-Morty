@@ -10,11 +10,6 @@
     margin-bottom: 32px;
 }
 
-.logo {
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .searchBox {
     position: relative;
     margin-bottom: 32px;
@@ -51,6 +46,12 @@
     margin-bottom: 0;
 }
 
+.loadingBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 @media screen and (min-width: 1440px) {
     .container {
@@ -62,10 +63,6 @@
     }
     .header {
         margin-bottom: 16px;
-    }
-
-    .logo {
-        width: 600px;
     }
 
     .searchBox {

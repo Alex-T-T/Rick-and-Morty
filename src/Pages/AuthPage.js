@@ -1,13 +1,15 @@
 
-import Google from "../components/Google";
+import { Google } from "../components";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 
 export const AuthPage = () => {
 
+    const clientId = process.env.REACT_APP_CLIENT_ID_KEY
+
     return (
-        <GoogleOAuthProvider clientId='1033718669490-bk0fh6jiun7b2dnac91f70f35emaaor9.apps.googleusercontent.com'>
+        <GoogleOAuthProvider clientId={clientId}>
             <Google />
         </GoogleOAuthProvider>
     )

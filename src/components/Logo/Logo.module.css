@@ -1,0 +1,16 @@
+.logo {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo:hover {
+    transform: scale(1.01);
+}
+
+@media screen and (min-width: 1440px) {
+
+    .logo {
+        width: 600px;
+    }
+
+}

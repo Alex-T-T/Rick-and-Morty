@@ -5,15 +5,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import debounce from 'lodash.debounce';
 import { Dna } from 'react-loader-spinner';
-import css from '../CharactersGallery/CharactersGallery.module.css'
 import { BiSearchAlt2 } from 'react-icons/bi'
-
-import logo from '../../assets/images/PngItem_438051 2.png'
 import { CharacterGalleryItem } from '../CharacterGalleryItem/CharacterGalleryItem'
+import { Logo } from '../Logo/Logo';
+import css from '../CharactersGallery/CharactersGallery.module.css'
 
 export const CharactersGallery = () => {
   const [characters, setCharacters] = useState(JSON.parse(window.localStorage.getItem('characters')) || null);
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isLoading, setIsLoading] = useState(true)
 
   const name = searchParams.get('name') || '';
@@ -54,7 +53,7 @@ export const CharactersGallery = () => {
   return (
     <div className={css.container}>
       <header className={css.header}>
-        <img className={css.logo} src={logo} alt='Rick and Morty logo' />
+        <Logo />
       </header>
 
       <main>
@@ -77,9 +76,9 @@ export const CharactersGallery = () => {
               return <li key={character.id} className={css.galleryItem}><Link to={character.id.toString()} ><CharacterGalleryItem  {...character} /></Link></li>
             })}
             </ul>
-            : <div>
+            : <div className={css.loadingBox}>
               <p>Loading... Please wait</p>
-              <Dna />
+              <Dna width={320} />
             </div>
         }
 
