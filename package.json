@@ -1,5 +1,6 @@
 {
   "name": "rick-and-morty",
+  "homepage": "https://github.com/Alex-T-T/Rick-and-Morty",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,7 +24,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "netlify deploy -p",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
