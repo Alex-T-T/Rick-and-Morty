@@ -6,9 +6,12 @@ import jwtDecode from 'jwt-decode';
 import { UserInfo } from '../UserInfo';
 import { Logo } from '../Logo/Logo';
 import css from './Google.module.css'
+import { useContext } from 'react';
+import UserContext from '../../context/UserContext';
 
 export const Google = () => {
     const navigate = useNavigate();
+    const { setIsLoggedIn } = useContext(UserContext)
 
     return (
         <div className={css.google}>
@@ -18,7 +21,7 @@ export const Google = () => {
                 onSuccess={(res) => {
                     const userInfo = jwtDecode(res.credential)
                     toast.success(<UserInfo userName={userInfo.name} avatar={userInfo.picture} />, { autoClose: 6000 });
-                    window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+                    setIsLoggedIn(true)
                     navigate('/characters')
                 }}
                 onError={() => {

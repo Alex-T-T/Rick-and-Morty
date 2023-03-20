@@ -5,12 +5,15 @@ import { CharactersGallery } from "./components";
 import { AuthPage } from "./Pages/AuthPage";
 import { StartPage } from "./Pages/StartPage";
 import PrivateRoute from "./Routes/PrivateRoute";
+import UserContext from "./context/UserContext";
+import { useState } from "react";
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
-    <>
+    <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="login" element={<AuthPage />} />
@@ -22,7 +25,7 @@ function App() {
 
         <Route path="*" element={<h1>Not found</h1>} />
       </Routes>
-    </>
+    </UserContext.Provider>
   )
 
 }
